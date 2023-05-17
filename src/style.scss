@@ -1,0 +1,43 @@
+$navcolor: #ece9e9ec;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: flex;
+}
+
+#navDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid red;
+    width: 20%;
+    height: 100vh;
+    background-color: $navcolor;
+    border-radius: 20px;
+    align-items: center;
+    padding: 50px;
+    .nav-item {
+        display: flex;
+        background-color: $navcolor;
+        border-radius: 20px;
+        padding: 10px;
+        width: 90%;
+        border: 1px solid red;
+        &:hover {
+            background-color: #D8D6D6;
+        }
+        &.search {
+            align-items: center;
+        }
+        img {
+            height: 55px;
+            align-self: flex-start;
+        }
+    }
+}
