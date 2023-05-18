@@ -15,7 +15,7 @@ export default class ManageStorage {
                     
                     e.code === 1024 || 
                     
-                    e.name === 'QuotaExceededError'|| 
+                    e.name === 'QuotaExceededError' || 
                     
                     e.name === 'NS_ERROR_DOM_QUOTA_REACHED') && 
 
@@ -23,5 +23,21 @@ export default class ManageStorage {
                     storage.length !== 0
             )
         };
+    }
+
+    static defineLocalStorage() {
+        this.storage = window['localStorage'];
+    }
+
+    static addToStorage(name, item) {
+        if (ManageStorage.storageAvailable('localStorage')) {
+            this.storage.setItem(name, item);
+        }
+    }
+
+    static removeFromStorage(name) {
+        if (ManageStorage.storageAvailable('localStorage')) {
+            this.storage.removeItem(name);
+        }
     }
 }
