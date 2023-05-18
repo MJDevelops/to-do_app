@@ -42,8 +42,10 @@ export default class ManageStorage {
         this.storage = window['localStorage'];
     }
 
-    static getProjectFromStorage(project) {
-        return ManageStorage.getTodoList().getProjectByName(project);
+    static getProjectFromStorage(searchProject) {
+        let project = ManageStorage.getTodoList().getProjectByName(searchProject);
+        project = Object.assign(new Project(), project);
+        return project;
     }
 
     static getAllProjectsFromStorage() {
