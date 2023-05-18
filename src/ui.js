@@ -4,7 +4,7 @@ import todayIcon from './images/tray-alert.svg';
 import upcomingIcon from './images/calendar-arrow-right.svg';
 import trashIcon from './images/trash-can.svg';
 import plusIcon from './images/plus.svg';
-
+import ManageStorage from './storage';
 
 export default class ManageUI {
     static loadWebsite() {
@@ -24,14 +24,18 @@ export default class ManageUI {
         body.appendChild(header);
     }
 
-    static createNavElement(image, text, classTag) {
+    static createNavElement(image = null, text, classTag) {
         const button = document.createElement('button');
-        const img = new Image();
         const p = document.createElement('p');
-        img.src = image;
+
+        if (!image === null) {
+            const img = new Image();
+            img.src = image;
+            button.appendChild(img);
+        }
+
         p.textContent = text;
         button.classList.add('nav-item', classTag);
-        button.appendChild(img);
         button.appendChild(p);
         return button;
     }
@@ -47,11 +51,11 @@ export default class ManageUI {
         const navDiv = document.createElement('div');
         const bodyElement = document.body;
         navDiv.id = 'navDiv';
-        navDiv.appendChild(ManageUI.createNavElement(searchIcon, 'Search', 'search'));
-        navDiv.appendChild(ManageUI.createNavElement(inboxIcon, 'Inbox', 'inbox'));
-        navDiv.appendChild(ManageUI.createNavElement(todayIcon, 'Today', 'today'));
-        navDiv.appendChild(ManageUI.createNavElement(upcomingIcon, 'Upcoming', 'upcoming'));
-        navDiv.appendChild(ManageUI.createNavElement(trashIcon, 'Trash', 'trash'));
+
+        ManageStorage.getAllProjectsFromStorage().forEach((project) => {
+            navDiv.appendChild(ManageUI.createNavElement(null, project.name, `${project.name.toLowerCase()}`));
+        });
+        
         bodyElement.appendChild(navDiv);
     }
 

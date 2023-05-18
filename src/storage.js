@@ -1,3 +1,6 @@
+import Project from './project';
+import ToDoProjects from './todo_projects';
+
 export default class ManageStorage {
     static storageAvailable(type) {
         let storage;
@@ -25,19 +28,29 @@ export default class ManageStorage {
         };
     }
 
+    static loadTodoList() {
+        const todolist = new ToDoProjects();
+        this.storage.setItem('todolist', JSON.stringify(todolist));
+    }
+
+    static getTodoList() {
+        const todolist = Object.assign(new ToDoProjects(), JSON.parse(this.storage.getItem('todolist')));
+        return todolist;
+    }
+
     static defineLocalStorage() {
         this.storage = window['localStorage'];
     }
 
-    static addToStorage(name, item) {
-        if (ManageStorage.storageAvailable('localStorage')) {
-            this.storage.setItem(name, item);
-        }
+    static getProjectFromStorage(project) {
+        return ManageStorage.getTodoList().getProjectByName(project);
     }
 
-    static removeFromStorage(name) {
-        if (ManageStorage.storageAvailable('localStorage')) {
-            this.storage.removeItem(name);
-        }
+    static getAllProjectsFromStorage() {
+        let projects = [];
+        ManageStorage.getTodoList().getAllProjects().forEach((project => {
+            projects.push(Object.assign(new Project(), project));
+        }));
+        return projects;
     }
 }
