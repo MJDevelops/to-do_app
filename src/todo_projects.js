@@ -10,7 +10,11 @@ export default class ToDoProjects {
     }
 
     getProjectByName(name) {
-        return this.projects.find(project => project.name === name);
+        return this.projects.find(project => project.getName() === name);
+    }
+
+    getAllProjects() {
+        return this.projects;
     }
 
     createNewProject(name) {
