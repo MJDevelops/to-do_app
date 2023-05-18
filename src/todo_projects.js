@@ -12,4 +12,8 @@ export default class ToDoProjects {
     getProjectByName(name) {
         return this.projects.find(project => project.name === name);
     }
+
+    createNewProject(name) {
+        this.projects.push(new Project(name));
+    }
 }
