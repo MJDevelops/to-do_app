@@ -7,6 +7,10 @@ export default class ToDo {
         this.id = id;
     }
 
+    get title() {
+        return this.title;
+    }
+
     set title(newTitle) {
         this.title = newTitle;
     }
