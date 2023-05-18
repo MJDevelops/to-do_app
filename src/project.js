@@ -4,11 +4,7 @@ export default class Project {
         this.todos = [];
     }
 
-    set name(name) {
-        this.name = name;
-    }
-
-    get name() {
+    getName() {
         return this.name;
     }
 
