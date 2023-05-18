@@ -29,26 +29,24 @@ export default class ManageStorage {
 
     static loadTodoList() {
         const todolist = new ToDoProjects();
-        ManageStorage.addToStorage('todolist', todolist);
+        this.storage.setItem('todolist', JSON.stringify(todolist));
+    }
+
+    static getTodoList() {
+        let todolist = JSON.parse(this.storage.getItem('todolist'));
+        todolist = Object.assign(new ToDoProjects(), todolist);
+        return todolist;
     }
 
     static defineLocalStorage() {
         this.storage = window['localStorage'];
     }
 
-    static addToStorage(name, item) {
-        if (ManageStorage.storageAvailable('localStorage')) {
-            this.storage.setItem(name, JSON.stringify(item));
-        }
+    static getProjectFromStorage(project) {
+        return ManageStorage.getTodoList().getProjectByName(project);
     }
 
-    static removeFromStorage(name) {
-        if (ManageStorage.storageAvailable('localStorage')) {
-            this.storage.removeItem(name);
-        }
-    }
-
-    static getFromStorage(item) {
-        return JSON.parse(this.storage.getItem(item));
+    static getAllProjects() {
+        return ManageStorage.getTodoList().getAllProjects();
     }
 }
