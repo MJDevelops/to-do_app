@@ -1,7 +1,18 @@
 $navcolor: #ece9e9ec;
 
+@font-face {
+    font-family: 'DM Serif Display';
+    src: url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.eot');
+    src: url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.eot') format('embedded-opentype'),
+         url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2') format('woff2'),
+         url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff') format('woff'),
+         url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf') format('truetype'),
+         url('../fonts/DM_Serif_Display/DMSerifDisplay-Regular.svg') format('svg');
+}
+
 * {
     box-sizing: border-box;
+    font-family: 'DM Serif Display';
 }
 
 body {
@@ -9,6 +20,17 @@ body {
     border: 0;
     padding: 0;
     display: grid;
+    grid-template-columns: minmax(500px, 0.5fr) 2fr;
+    grid-template-areas: 
+    'head head'
+    'nav content';
+}
+
+header {
+    display: flex;
+    padding: 50px;
+    gap: 20px;
+    grid-area: head;
 }
 
 #navDiv {
@@ -16,12 +38,13 @@ body {
     flex-direction: column;
     gap: 20px;
     border: 1px solid red;
-    width: 20%;
     height: 100vh;
     background-color: $navcolor;
     border-radius: 20px;
     align-items: center;
     padding: 50px;
+    grid-area: nav;
+
     .nav-item {
         display: flex;
         background-color: $navcolor;
@@ -29,11 +52,11 @@ body {
         padding: 10px;
         width: 90%;
         border: 1px solid red;
+        gap: 10px;
+        align-items: center;
+
         &:hover {
             background-color: #D8D6D6;
-        }
-        &.search {
-            align-items: center;
         }
         img {
             height: 55px;
@@ -44,4 +67,19 @@ body {
 
 #contentDiv {
     display: flex;
+    flex-direction: column;
+    padding: 50px;
+    grid-area: content;
+    *.task-btn {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 50px;
+        }
+    }
+    .inbox {
+        display: flex;
+        flex-direction: column;
+    }
 }
