@@ -1,3 +1,4 @@
+import Project from './project';
 import ToDoProjects from './todo_projects';
 
 export default class ManageStorage {
@@ -33,8 +34,7 @@ export default class ManageStorage {
     }
 
     static getTodoList() {
-        let todolist = JSON.parse(this.storage.getItem('todolist'));
-        todolist = Object.assign(new ToDoProjects(), todolist);
+        const todolist = Object.assign(new ToDoProjects(), JSON.parse(this.storage.getItem('todolist')));
         return todolist;
     }
 
@@ -46,7 +46,11 @@ export default class ManageStorage {
         return ManageStorage.getTodoList().getProjectByName(project);
     }
 
-    static getAllProjects() {
-        return ManageStorage.getTodoList().getAllProjects();
+    static getAllProjectsFromStorage() {
+        let projects = [];
+        ManageStorage.getTodoList().getAllProjects().forEach((project => {
+            projects.push(Object.assign(new Project(), project));
+        }));
+        return projects;
     }
 }
