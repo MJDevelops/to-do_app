@@ -3,5 +3,6 @@ import ManageUI from './ui';
 import ManageStorage from './storage';
 
 
-ManageUI.loadWebsite();
+ManageStorage.defineLocalStorage();
 ManageStorage.loadTodoList();
+ManageUI.loadWebsite();
