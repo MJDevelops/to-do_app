@@ -3,27 +3,21 @@ export default class ToDo {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
-        this.id = id;
     }
 
-    get title() {
+    getTitle() {
         return this.title;
     }
 
-    set title(newTitle) {
+    setTitle(newTitle) {
         this.title = newTitle;
     }
 
-    set description(newDescription) {
+    setDescription(newDescription) {
         this.description = newDescription;
     }
 
-    set dueDate(newDate) {
+    setDueDate(newDate) {
         this.dueDate = newDate;
-    }
-
-    set priority(newPriority) {
-        this.priority = newPriority;
     }
 }
