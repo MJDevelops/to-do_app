@@ -1,5 +1,6 @@
 import Project from './project';
 import ToDoProjects from './todo_projects';
+import ToDo from './todo';
 
 export default class ManageStorage {
     static storageAvailable(type) {
@@ -49,5 +50,18 @@ export default class ManageStorage {
             projects.push(Object.assign(new Project(), project));
         });
         return projects;
+    }
+
+    static getTodosFromProject(fromProject) {
+        let todoArr = [];
+        let todos = ManageStorage.getProjectFromStorage(fromProject).getTodos();
+        todos.forEach(todo => {
+            todoArr.push(Object.assign(new ToDo(), todo));
+        });
+        return todoArr;
+    }
+
+    static saveTodolist (todolist) {
+        window.localStorage.setItem('todolist', JSON.stringify(todolist));
     }
 }
