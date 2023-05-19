@@ -1,3 +1,5 @@
+import ToDo from "./todo";
+
 export default class Project {
     constructor(name) {
         this.name = name;
@@ -8,8 +10,12 @@ export default class Project {
         return this.name;
     }
 
-    addToDo(todo) {
-        if(this.todos.find((toDo) => toDo.title === todo.title)) return;
-        this.todos.push(todo);
+    addToDo(title, description, dueDate) {
+        if(this.todos.find((toDo) => toDo.title === title)) return;
+        this.todos.push(new ToDo(title, description, dueDate));
+    }
+
+    getTodos() {
+        return this.todos;
     }
 }
