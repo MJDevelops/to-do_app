@@ -10,7 +10,7 @@ export default class ToDoProjects {
     }
 
     getProjectByName(name) {
-        return this.projects.find(project => project.getName() === name);
+        return this.projects.find(project => project.getName().toLowerCase() === name.toLowerCase());
     }
 
     getAllProjects() {
@@ -18,6 +18,7 @@ export default class ToDoProjects {
     }
 
     createNewProject(name) {
+        if (this.projects.find(project => project.getName() === name)) return;
         this.projects.push(new Project(name));
     }
 }
