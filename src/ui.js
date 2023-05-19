@@ -101,6 +101,16 @@ export default class ManageUI {
         contentDiv.innerHTML = '';
     }
 
+    static displayTodos(fromProject) {
+        const content = document.getElementById('contentDiv');
+        const todos = ManageStorage.getTodosFromProject(fromProject);
+        todos.forEach(todo => {
+            const p = document.createElement('p');
+            p.textContent = todo.getTitle();
+            content.children[0].appendChild(p);
+        })
+    }
+
     static openProjectOnClick() {
         const buttons = document.querySelectorAll('.nav-item');
         buttons.forEach(btn => {
@@ -108,7 +118,8 @@ export default class ManageUI {
                 const project = ManageStorage.getProjectFromStorage(e.target.classList[1]);
                 ManageUI.removeContent();
                 ManageUI.constructContent(project.getName(), project.getName().toLowerCase());
-            })
-        })
+                ManageUI.displayTodos(e.target.classList[1]);
+            });
+        });
     }
 }
