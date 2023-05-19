@@ -28,8 +28,9 @@ export default class ManageUI {
         const button = document.createElement('button');
         const p = document.createElement('p');
 
-        if (!image === null) {
-            const img = new Image();
+        if(image) {
+            let img;
+            img = new Image();
             img.src = image;
             button.appendChild(img);
         }
@@ -53,7 +54,15 @@ export default class ManageUI {
         navDiv.id = 'navDiv';
 
         ManageStorage.getAllProjectsFromStorage().forEach((project) => {
-            navDiv.appendChild(ManageUI.createNavElement(null, project.name, `${project.name.toLowerCase()}`));
+            if (project.getName() === 'Inbox') {
+                navDiv.appendChild(ManageUI.createNavElement(inboxIcon, project.getName(), `${project.getName().toLowerCase()}`));
+            } else if (project.getName() === 'Today') {
+                navDiv.appendChild(ManageUI.createNavElement(todayIcon, project.getName(), `${project.getName().toLowerCase()}`));
+            } else if (project.getName() === 'Upcoming') {
+                navDiv.appendChild(ManageUI.createNavElement(upcomingIcon, project.getName(), `${project.getName().toLowerCase()}`));
+            } else {
+                navDiv.appendChild(ManageUI.createNavElement(undefined, project.getName(), `${project.getName().toLowerCase()}`));
+            }
         });
         
         bodyElement.appendChild(navDiv);
