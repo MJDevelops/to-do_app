@@ -46,9 +46,9 @@ export default class ManageStorage {
 
     static getAllProjectsFromStorage() {
         let projects = [];
-        ManageStorage.getTodoList().getAllProjects().forEach((project => {
+        ManageStorage.getTodoList().getAllProjects().forEach((project) => {
             projects.push(Object.assign(new Project(), project));
-        }));
+        });
         return projects;
     }
 }
