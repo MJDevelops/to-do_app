@@ -39,8 +39,7 @@ export default class ManageStorage {
     }
 
     static getProjectFromStorage(searchProject) {
-        let project = ManageStorage.getTodoList().getProjectByName(searchProject);
-        project = Object.assign(new Project(), project);
+        let project = ManageStorage.getAllProjectsFromStorage().find(project => project.getName().toLowerCase() === searchProject.toLowerCase());
         return project;
     }
 
