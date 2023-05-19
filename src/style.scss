@@ -82,4 +82,10 @@ header {
         display: flex;
         flex-direction: column;
     }
+    div {
+        .todo-item {
+            display: flex;
+            height: 20px;
+        }
+    }
 }
