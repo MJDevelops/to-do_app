@@ -11,7 +11,8 @@ export default class ManageUI {
         ManageUI.constructHeader();
         ManageUI.constructNavDiv();
         ManageUI.constructContentDiv();
-        ManageUI.constructInbox();
+        ManageUI.constructContent();
+        ManageUI.openProjectOnClick();
     }
 
     static constructHeader() {
@@ -36,7 +37,7 @@ export default class ManageUI {
         }
 
         p.textContent = text;
-        button.classList.add('nav-item', classTag);
+        button.classList.add('nav-item', `${classTag}`);
         button.appendChild(p);
         return button;
     }
@@ -83,15 +84,31 @@ export default class ManageUI {
         return taskButton;
     }
 
-    static constructInbox() {
-        const inboxDiv = document.createElement('div');
+    static constructContent(head = undefined, id = undefined) {
+        const content = document.createElement('div');
         const heading = document.createElement('h3');
         const contentDiv = document.getElementById('contentDiv');
 
-        inboxDiv.classList.add('inbox');
-        heading.textContent = 'Inbox';
-        inboxDiv.appendChild(heading);
-        inboxDiv.appendChild(ManageUI.newTaskButton());
-        contentDiv.appendChild(inboxDiv);
+        content.id = id === undefined ? 'inbox' : id;
+        heading.textContent = head === undefined ? 'Inbox' : head;
+        content.appendChild(heading);
+        content.appendChild(ManageUI.newTaskButton());
+        contentDiv.appendChild(content);
+    }
+
+    static removeContent() {
+        const contentDiv = document.getElementById('contentDiv');
+        contentDiv.innerHTML = '';
+    }
+
+    static openProjectOnClick() {
+        const buttons = document.querySelectorAll('.nav-item');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const project = ManageStorage.getProjectFromStorage(e.target.classList[1]);
+                ManageUI.removeContent();
+                ManageUI.constructContent(project.getName(), project.getName().toLowerCase());
+            })
+        })
     }
 }
