@@ -30,16 +30,12 @@ export default class ManageStorage {
 
     static loadTodoList() {
         const todolist = new ToDoProjects();
-        this.storage.setItem('todolist', JSON.stringify(todolist));
+        window.localStorage.setItem('todolist', JSON.stringify(todolist));
     }
 
     static getTodoList() {
-        const todolist = Object.assign(new ToDoProjects(), JSON.parse(this.storage.getItem('todolist')));
+        const todolist = Object.assign(new ToDoProjects(), JSON.parse(window.localStorage.getItem('todolist')));
         return todolist;
-    }
-
-    static defineLocalStorage() {
-        this.storage = window['localStorage'];
     }
 
     static getProjectFromStorage(searchProject) {
